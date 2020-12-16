@@ -5,7 +5,6 @@ const sinon = require("sinon");
 
 describe("Turn on the tap when I click on the button", function (){
     it("makes water falling into the jar", function () {
-
         const Water = function create() {
             const isFalling = () => {throw new Error("Not implemented")};
             const fall = () => {throw new Error("Not implemented")};
@@ -19,9 +18,17 @@ describe("Turn on the tap when I click on the button", function (){
         water.fall = sinon.spy();
         water.isFalling = sinon.stub(() => true);
 
-        const button = sinon.fake();
-        button.onClick = sinon.stub((action) => action());
-        button.click = sinon.fake();
+        const Button = function create() {
+            let clickAction;
+            const onClick = (action) => clickAction = action;
+            const click = () => clickAction();
+            return {
+                onClick,
+                click
+            };
+        };
+
+        const button = Button();
 
         button.onClick(water.fall);
         button.click();
