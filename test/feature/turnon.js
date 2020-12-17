@@ -2,6 +2,7 @@
 const {describe, it, beforeEach} = require("mocha");
 const assert = require("assert");
 const sinon = require("sinon");
+const {TurnOnWater} = require("../../src/core/turnonwater");
 const {Water} = require("../../src/core/water/water");
 const {Button} = require("../../src/core/button/button");
 
@@ -12,7 +13,9 @@ describe("Turn on the tap when I click on the button", function (){
     beforeEach(() => {
         water.turnOn = sinon.spy(() => water.isFalling = sinon.stub(() => true));
         water.isFalling = sinon.stub(() => false);
-        button.onClick(water.turnOn);
+        const turnOn = TurnOnWater(water);
+
+        button.onClick(turnOn);
     });
 
     it("makes water falling into the jar", function () {

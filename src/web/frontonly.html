@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fill the jar interface</title>
+    <style>
+        button#open-tap {
+            background-color: dodgerblue; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            box-shadow: black;
+        }
+        button#open-tap:hover {
+            background-color: lightskyblue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; width: 600px; height: 700px">
+<button id="open-tap" type="button" style="z-index: 2000; position: absolute; top: 50px; left: 400px">turn on the water</button>
+<img src="img/foreground.png" id="jar" alt="jar" style="z-index: 1000; position: absolute; top: 0; left: 0" />
+<img src="img/filling.png" id="filling" alt="filling" style="z-index: 500; position: absolute; top: 0; left: 0; display: none" />
+<img src="img/full.png" id="full" alt="full" style="z-index: 100; position: absolute; top: 0; left: 0; display: none" />
+</body>
+</html>

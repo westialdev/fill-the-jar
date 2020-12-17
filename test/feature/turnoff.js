@@ -3,6 +3,7 @@
 const {describe, it, beforeEach} = require("mocha");
 const assert = require("assert");
 const sinon = require("sinon");
+const {WatchWater} = require("../../src/core/watchwater");
 const {Water} = require("../../src/core/water/water");
 
 
@@ -19,14 +20,18 @@ describe("Turn off when the water reaches the maximum of the jar", function (){
         water.isMaxGot = sinon.stub(() => true);
         water.turnOn();
 
-        if (water.isMaxGot()) water.turnOff();
+        const watchWater = WatchWater(water);
+        watchWater();
+
         assert.strictEqual(water.isFalling(), false);
     });
 
     it("does nothing if water is already off", function () {
         water.isMaxGot = sinon.stub(() => false);
 
-        if (water.isMaxGot()) water.turnOff();
+        const watchWater = WatchWater(water);
+        watchWater();
+
         assert.strictEqual(water.isFalling(), false);
     });
 });
