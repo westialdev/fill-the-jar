@@ -27,14 +27,31 @@ Development steps as follows.
 
 ### Core logic ###
 
-Create the core logic from a test driven approach.
+* Create the core logic from a test driven approach.
+* Encapsulate the logic into reusable use cases able to be implemented in 
+  multiple contexts.
 
-### Frontend implementation ###
+### Frontend context implementation ###
+
+First implementation, we need visual, we want to see the water falling, and 
+finally the jar filled up.
 
 Source code in [src/web/frontonly.html](src/web/frontonly.html).
 
 * Turn on: Show the water falling when user clicks on the button.
-* Turn off: Wait for 30 seconds and display the jar filled up to the MAX mark.
+* Turn off: Wait for a few seconds and display the jar filled up to the MAX mark.
+
+Usage: open the html file in your browser and use it as is.
+
+#### Tips ####
+
+After creating the [src/web/js/fillthejar.js](src/web/js/fillthejar.js) file in 
+the nodejs way you have to browserify it. I fastly got done by adding the 
+variables into the global window object and bundling it with browserify package.
+
+```
+browserify src/web/js/fillthejar.js -o src/web/js/fillthejar-browser.js
+```
 
 ## Install ##
 

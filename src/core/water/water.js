@@ -1,6 +1,6 @@
 'use strict';
 
-exports.Water = function create() {
+exports.Water = function create(implementation) {
     const isFalling = () => {throw new Error("Not implemented")};
     const turnOn = () => {throw new Error("Not implemented")};
     const turnOff = () => {throw new Error("Not implemented")};
@@ -9,6 +9,7 @@ exports.Water = function create() {
         turnOn,
         turnOff,
         isFalling,
-        isMaxGot
+        isMaxGot,
+        ...implementation
     };
 };

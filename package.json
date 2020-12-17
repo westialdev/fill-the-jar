@@ -12,6 +12,7 @@
   "author": "Jaume Mila",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "browserify": "^17.0.0",
     "mocha": "^8.2.1",
     "sinon": "^9.2.2"
   }
