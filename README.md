@@ -63,7 +63,7 @@ maximum level.
 
 #### Express API ####
 
-Start the backend server as follows:
+Start the backend server as follows.
 
 ```
 node src/api/app.js
@@ -71,13 +71,13 @@ node src/api/app.js
 
 ## Install ##
 
-Install dependencies:
+Install dependencies.
 
 ```
 npm install
 ```
 
-Execute the unit tests:
+Execute the unit tests.
 
 ```
 npm test
