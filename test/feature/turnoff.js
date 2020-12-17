@@ -22,6 +22,11 @@ describe("Turn off when the water reaches the maximum of the jar", function (){
         if (water.isMaxGot()) water.turnOff();
         assert.strictEqual(water.isFalling(), false);
     });
+
     it("does nothing if water is already off", function () {
+        water.isMaxGot = sinon.stub(() => false);
+
+        if (water.isMaxGot()) water.turnOff();
+        assert.strictEqual(water.isFalling(), false);
     });
 });
