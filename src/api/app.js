@@ -20,6 +20,10 @@ app.post('/api/on', async (req, res) => {
     __response(res, {turnedOn: water.isFalling()});
 });
 
+app.get('/api/on', async (req, res) => {
+    __response(res, {turnedOn: water.isFalling()});
+});
+
 app.listen(port, () => {
     console.log(`Fill the water app listening at http://localhost:${port}`)
 });
