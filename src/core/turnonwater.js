@@ -1,7 +1,7 @@
 'use strict';
 
-exports.TurnOnWater = function create(water) {
+exports.TurnOnWater = function create(water, maxSensor) {
     return async () => {
-        water.turnOn();
+        if (!maxSensor.isOn()) water.turnOn();
     };
 };

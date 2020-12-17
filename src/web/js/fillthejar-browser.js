@@ -1763,9 +1763,9 @@ process.umask = function() { return 0; };
 },{}],28:[function(require,module,exports){
 'use strict';
 
-exports.TurnOnWater = function create(water) {
+exports.TurnOnWater = function create(water, maxSensor) {
     return async () => {
-        water.turnOn();
+        if (!maxSensor.isOn()) water.turnOn();
     };
 };
 
@@ -1774,11 +1774,16 @@ exports.TurnOnWater = function create(water) {
 
 const axios = require("axios");
 
-exports.BrowserWater = function create(rootUrl, displayTurnOn) {
+exports.BrowserWater = function create(rootUrl, displayTurnOn, displayGotMax) {
+    let gotMax = false;
     const __httpError = (response) => console.debug(`HTTP Error: ${JSON.stringify(response)}`);
     const __processFalling = (response) => {
-        if (response.hasOwnProperty("data") && true === response.data.turnedOn) {
-            displayTurnOn();
+        if (response.status < 400) {
+            if (true === response.data.turnedOn) displayTurnOn();
+            if (true === response.data.gotMax) {
+                gotMax = true;
+                displayGotMax();
+            } else gotMax = false;
         } else __httpError(response);
     };
     const isFalling = async () => {
@@ -1789,10 +1794,19 @@ exports.BrowserWater = function create(rootUrl, displayTurnOn) {
         const response = await axios({method: 'post', url: `${rootUrl}/api/on/`});
         __processFalling(response);
     }
+    const turnOff = displayGotMax;
+
+    const getSensorMirror = () => {
+        return {
+            isOn: () => gotMax
+        }
+    };
 
     return {
         turnOn,
-        isFalling
+        turnOff,
+        isFalling,
+        getSensorMirror
     };
 }
 },{"axios":1}],30:[function(require,module,exports){
@@ -1819,10 +1833,14 @@ const {TurnOnWater} = require("../../core/turnonwater");
 const browserWater = BrowserWater(
     "..",
     () => document.getElementById("filling").style.display = "block",
+    () => {
+        document.getElementById("filling").style.display = "none";
+        document.getElementById("full").style.display = "block";
+    },
 );
 
 setInterval(browserWater.isFalling, 1000);
 
-window.turnOn = TurnOnWater(Water(browserWater));
+window.turnOn = TurnOnWater(Water(browserWater), browserWater.getSensorMirror());
 
 },{"../../core/turnonwater":28,"../../core/water/browserwater":29,"../../core/water/water":30}]},{},[31]);
