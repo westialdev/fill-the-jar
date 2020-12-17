@@ -36,21 +36,37 @@ Development steps as follows.
 First implementation, we need visual, we want to see the water falling, and 
 finally the jar filled up.
 
-Source code in [src/web/frontonly.html](src/web/frontonly.html).
+Source code in [src/web/index.html](src/web/index.html).
 
 * Turn on: Show the water falling when user clicks on the button.
 * Turn off: Wait for a few seconds and display the jar filled up to the MAX mark.
 
 Usage: open the html file in your browser and use it as is.
 
-#### Tips ####
+#### Browserify the modules ####
 
 After creating the [src/web/js/fillthejar.js](src/web/js/fillthejar.js) file in 
 the nodejs way you have to browserify it. I fastly got done by adding the 
 variables into the global window object and bundling it with browserify package.
 
+Run the following command every time you edit an involved file.
+
 ```
 browserify src/web/js/fillthejar.js -o src/web/js/fillthejar-browser.js
+```
+
+### Backend integration ###
+
+Publish the interface to the world, so you can access it remotely. All clients 
+remotely share the water state, if it is turned on, off, or the jar reached the 
+maximum level.
+
+#### Express API ####
+
+Start the backend server as follows:
+
+```
+node src/api/app.js
 ```
 
 ## Install ##
