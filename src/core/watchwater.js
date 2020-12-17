@@ -1,7 +1,7 @@
 'use strict';
 
-exports.WatchWater = function create(water) {
+exports.WatchWater = function create(water, maxSensor) {
     return async () => {
-        if (water.isFalling() && water.isMaxGot()) water.turnOff();
+        if (water.isFalling() && maxSensor.isOn()) water.turnOff();
     };
 };
