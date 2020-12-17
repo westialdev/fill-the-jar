@@ -5,10 +5,8 @@ const assert = require("assert");
 const sinon = require("sinon");
 
 describe("Turn off when the water reaches the maximum of the jar", function (){
-    it("does nothing if water is already off", function () {
-
+    it("stops water if maximum level is reached", function () {
     });
-    it("watches water to do not pass over maximum level", function () {
-
+    it("does nothing if water is already off", function () {
     });
 });
