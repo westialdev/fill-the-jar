@@ -7,7 +7,7 @@ and this API handles real electronic components and a sensor.
 
 A trip from the TDD/BDD to the IoT only with Javascript.
 
-It makes use of [browserify](http://browserify.org/) to convert the nodejs modules into a browser 
+It takes advantage of [browserify](http://browserify.org/) to convert the nodejs modules into a browser 
 supported controllers. 
  
 It uses [express](https://expressjs.com/) for the HTTP API endpoints.
