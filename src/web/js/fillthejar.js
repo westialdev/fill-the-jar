@@ -6,7 +6,10 @@ const {TurnOnWater} = require("../../core/turnonwater");
 
 const browserWater = BrowserWater(
     "..",
-    () => document.getElementById("filling").style.display = "block",
+    () => {
+        document.getElementById("filling").style.display = "block";
+        document.getElementById("open-tap").style.display = "none";
+    },
     () => {
         document.getElementById("filling").style.display = "none";
         document.getElementById("full").style.display = "block";
