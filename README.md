@@ -1,24 +1,41 @@
-Fill the jar Dojo
-=================
+Fill the jar
+============
 
-This repository is a consecutive git commits based on a step-by-step dojo to
-practice test driven development. 
+This project is just a proof of concept in a dojo-like format to practice a test
+driven approach to finally release a web interface connected to a backend API,
+and this API handles real electronic components and a sensor.
 
-It provides a closure multiple, quite diverse and unusual implementation of the
-same use case.
+A trip from the TDD/BDD to the IoT only with Javascript.
 
-This project has been created for a special Leadtech's middle end team speech 
-although it is thought as dojo-like session as well.
+It makes use of [browserify](http://browserify.org/) to convert the nodejs modules into a browser 
+supported controllers. 
+ 
+It uses [express](https://expressjs.com/) for the HTTP API endpoints.
+
+And finally it handles the Raspberry Pi GPIO with the lightweight library
+[rpi-gpio](https://github.com/JamesBarwell/rpi-gpio.js).
+
+See the final result video.
+
+[![Video result](http://img.youtube.com/vi/qSrHnOv2n00/0.jpg)](http://www.youtube.com/watch?v=qSrHnOv2n00 "Video result")
 
 ## Important warnings ##
 
 Do not connect the Raspberry Pi pins if you do not know your specific device 
-model pinout.
+model pin out.
 
 Do not put animals in the water because with the "cable pelao" sensor, a small
 current goes through the water.
 
-## Fill the Jar exercise ##
+## Dojo format ##
+
+This repository is a consecutive git commits based on a step-by-step dojo to
+practice test driven development.
+
+This project has been created for a special [Leadtech's middleend team](https://leadtech.com) 
+presentation. Fabulous team in a great company!
+
+### Dojo directives ###
 
 There is a webpage interface with a tap, a button and a jar with a maximum level
 mark. The practice consists on to give two features to the interface:
@@ -33,13 +50,13 @@ different implementation.
 
 Development steps as follows.
 
-### Core logic ###
+#### Core logic ####
 
 * Create the core logic from a test driven approach.
 * Encapsulate the logic into reusable use cases able to be implemented in 
   multiple contexts.
 
-### Frontend context implementation ###
+#### Frontend integration ####
 
 First implementation, we need visual, we want to see the water falling, and 
 finally the jar filled up.
@@ -51,7 +68,7 @@ Source code in [src/web/index.html](src/web/index.html).
 
 Usage: open the html file in your browser and use it as is.
 
-#### Browserify the modules ####
+##### Browserify the modules #####
 
 After creating the [src/web/js/fillthejar-local.js](src/web/js/fillthejar-local.js) file in 
 the nodejs way you have to browserify it. I fastly got done by adding the 
@@ -64,13 +81,13 @@ browserify src/web/js/fillthejar-local.js -o src/web/js/fillthejar-browser-local
 browserify src/web/js/fillthejar-ngrok.js -o src/web/js/fillthejar-browser-ngrok.js
 ```
 
-### Backend integration ###
+#### Backend integration ####
 
 Publish the interface to the world, so you can access it remotely. All clients 
 remotely share the water state, if it is turned on, off, or the jar reached the 
 maximum level.
 
-#### Express API ####
+##### Express API #####
 
 Start the backend server as follows.
 
@@ -78,7 +95,7 @@ Start the backend server as follows.
 node src/api/app.js
 ```
 
-#### ngrok to the world ####
+##### From ngrok to the world #####
 
 You can use ngrok to populate the service outside your local network.
 
@@ -86,18 +103,18 @@ The free use of ngrok allows only 20 requests for minute. The default index.html
 file is for ngrok at 5 second intervals, and the index-local.html is for local
 use only.
 
-### "Realend" integration and deployment ###
+#### "Realend" integration ####
 
 Things that happen in the reality, and special thanks to [rpi-gpio](https://github.com/JamesBarwell/rpi-gpio.js)
 the digital input and outputs that I need for this exercise can be handled with 
 Javascript.
 
-#### Raspberry Pi pinout ####
+##### Raspberry Pi pin out #####
 
 Do not connect GPIO interface wires if you do not know every pin. You can damage
-your Raspberry Pi device. To absolutely know the pinout of your device, execute
-the `pinout` command. I made this project on a Raspberry Pi 3 B+ and the pinout
-is as follows, not all models have the same pinout:
+your Raspberry Pi device. To absolutely know the pin out of your device, execute
+the `pinout` command. I made this project on a Raspberry Pi 3 B+ and the pin out
+is as follows, not all models have the same pin out:
 
 ```
 $ pinout
@@ -151,16 +168,34 @@ GPIO26 (37) (38) GPIO20
 For further information, please refer to https://pinout.xyz/
 ```
 
-## Install ##
+Supported models:
 
-Install dependencies in the development environment.
+* Raspberry Pi 1 Model A
+* Raspberry Pi 1 Model A+
+* Raspberry Pi 1 Model B
+* Raspberry Pi 1 Model B+
+* Raspberry Pi 2 Model B
+* Raspberry Pi 3 Model B
+* Raspberry Pi 3 Model B+
+* Raspberry Pi 4 Model B
+* Raspberry Pi Zero
+* Raspberry Pi Zero W
 
-```
-npm install
-```
+##### Circuit #####
+
+The following circuit schema is based on the Raspberry Pi 3 B+ pin out, and it
+matches with the configuration file [src/config.js](src/config.js).
+
+![Circuit schema](doc/circuit.jpg)
+
+## Install and usage in a Raspberry Pi ##
+
+After you made and connected everything in the circuit, follow the next steps. 
+
+Configure the web server port and GPIO pins in [src/config.js](src/config.js).
 
 Install dependencies and separately the rpi-gpio that only works in Raspberry Pi 
-environment, to try your "realend" environment.
+environment.
 
 ```
 npm install
@@ -173,11 +208,21 @@ Execute the unit tests.
 npm test
 ```
 
+Start the webserver.
+```
+node src/api/app.js
+```
+
+Visit the local webpage at [http://localhost:3000/web/index-local.html](http://localhost:3000/web/index-local.html)
+and click the button. 
+
+You will see something like it is shown in the [video](https://youtu.be/qSrHnOv2n00).
+
 ## Proof of concept ##
 
 Here [test/poc](test/poc) there is a proof of concept script, and a circuit 
 picture. It consists in turning on and off a led and the pump in a 
-Raspberry Pi 3 B+.
+Raspberry Pi 3 B+. It is useful to check your device model support.
 
 ## Author ##
 

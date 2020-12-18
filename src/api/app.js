@@ -1,6 +1,11 @@
 'use strict';
 
 const express = require('express')
+const {buzzerPin} = require("../config");
+const {ledPin} = require("../config");
+const {pumpPin} = require("../config");
+const {maxSensorPin} = require("../config");
+const {serverPort} = require("../config");
 const {RpiSensorFactory} = require("../rpi/rpisensorfactory");
 const {RpiWaterFactory} = require("../rpi/rpiwaterfactory");
 const {MaxSensor} = require("../core/water/maxsensor");
@@ -8,12 +13,6 @@ const {WatchWater} = require("../core/watchwater");
 const {TurnOnWater} = require("../core/turnonwater");
 const {Water} = require("../core/water/water");
 const app = express()
-const port = 3000
-
-const buzzerPin = 15;
-const ledPin = 7;
-const pumpPin = 10;
-const maxSensorPin = 19;
 
 const rpiSensorFactory = RpiSensorFactory(maxSensorPin);
 const rpiMaxSensor = rpiSensorFactory.createSensor();
@@ -38,8 +37,8 @@ app.get('/api/on', async (req, res) => {
     __response(res, {turnedOn: water.isFalling(), gotMax: sensor.isOn()});
 });
 
-const startServer = () => app.listen(port, () => {
-    console.log(`Fill the water app listening at http://localhost:${port}`)
+const startServer = () => app.listen(serverPort, () => {
+    console.log(`Fill the water app listening at http://localhost:${serverPort}`)
 });
 
 // Entry point
