@@ -1,8 +1,8 @@
 'use strict';
 
 const express = require('express')
-const {RpiFactory} = require("../rpi/rpifactory");
-const {TimeoutMaxSensor} = require("../core/water/timeoutmaxsensor");
+const {RpiSensorFactory} = require("../rpi/rpisensorfactory");
+const {RpiWaterFactory} = require("../rpi/rpiwaterfactory");
 const {MaxSensor} = require("../core/water/maxsensor");
 const {WatchWater} = require("../core/watchwater");
 const {TurnOnWater} = require("../core/turnonwater");
@@ -13,11 +13,14 @@ const port = 3000
 const buzzerPin = 15;
 const ledPin = 7;
 const pumpPin = 10;
+const maxSensorPin = 19;
 
-const rpiFactory = RpiFactory(pumpPin, ledPin, buzzerPin);
-const rpiWater = rpiFactory.createWater();
+const rpiSensorFactory = RpiSensorFactory(maxSensorPin);
+const rpiMaxSensor = rpiSensorFactory.createSensor();
+const rpiWaterFactory = RpiWaterFactory(pumpPin, ledPin, buzzerPin);
+const rpiWater = rpiWaterFactory.createWater();
 const water = Water(rpiWater);
-const sensor = MaxSensor(TimeoutMaxSensor(5));
+const sensor = MaxSensor(rpiMaxSensor);
 const turnOn = TurnOnWater(water, sensor);
 const watchWater = WatchWater(water, sensor);
 
@@ -28,7 +31,6 @@ app.use('/web', express.static('src/web'));
 
 app.post('/api/on', async (req, res) => {
     await turnOn();
-    sensor.waterTurnedOn();
     __response(res, {}, 204);
 });
 

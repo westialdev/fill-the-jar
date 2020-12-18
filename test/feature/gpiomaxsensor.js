@@ -5,20 +5,20 @@ const sinon = require("sinon");
 const {GpioMaxSensor} = require("../../src/core/water/gpiomaxsensor");
 
 describe("GPIO maximum level sensor", function () {
-    it("returns true when pin is high", async function () {
-        const isPinHighFn = sinon.stub(async () => true);
+    it("returns true when pin is high", function () {
+        const isPinHighFn = sinon.stub(() => true);
         const sensor = GpioMaxSensor(isPinHighFn);
-        assert.strictEqual(await sensor.isOn(), true);
+        assert.strictEqual(sensor.isOn(), true);
     });
-    it("returns false when pin is not high", async function () {
-        const isPinHighFn = sinon.stub(async () => false);
+    it("returns false when pin is not high", function () {
+        const isPinHighFn = sinon.stub(() => false);
         const sensor = GpioMaxSensor(isPinHighFn);
-        assert.strictEqual(await sensor.isOn(), false);
+        assert.strictEqual(sensor.isOn(), false);
     });
-    it("calls pin to ask if it is high", async function () {
+    it("calls pin to ask if it is high", function () {
         const isPinHighFn = sinon.spy();
         const sensor = GpioMaxSensor(isPinHighFn);
-        await sensor.isOn();
+        sensor.isOn();
         assert.ok(isPinHighFn.calledOnce);
     });
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.GpioMaxSensor = function create(isPinHighFn) {
-    const isOn = async () => await isPinHighFn();
+    const isOn = () => isPinHighFn();
     return {
         isOn
     }

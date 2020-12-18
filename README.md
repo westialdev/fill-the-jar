@@ -10,6 +10,14 @@ same use case.
 This project has been created for a special Leadtech's middle end team speech 
 although it is thought as dojo-like session as well.
 
+## Important warnings ##
+
+Do not connect the Raspberry Pi pins if you do not know your specific device 
+model pinout.
+
+Do not put animals in the water because with the "cable pelao" sensor, a small
+current goes through the water.
+
 ## Fill the Jar exercise ##
 
 There is a webpage interface with a tap, a button and a jar with a maximum level
@@ -45,14 +53,15 @@ Usage: open the html file in your browser and use it as is.
 
 #### Browserify the modules ####
 
-After creating the [src/web/js/fillthejar.js](src/web/js/fillthejar.js) file in 
+After creating the [src/web/js/fillthejar-local.js](src/web/js/fillthejar-local.js) file in 
 the nodejs way you have to browserify it. I fastly got done by adding the 
 variables into the global window object and bundling it with browserify package.
 
 Run the following command every time you edit an involved file.
 
 ```
-browserify src/web/js/fillthejar.js -o src/web/js/fillthejar-browser.js
+browserify src/web/js/fillthejar-local.js -o src/web/js/fillthejar-browser-local.js
+browserify src/web/js/fillthejar-ngrok.js -o src/web/js/fillthejar-browser-ngrok.js
 ```
 
 ### Backend integration ###
@@ -68,6 +77,14 @@ Start the backend server as follows.
 ```
 node src/api/app.js
 ```
+
+#### ngrok to the world ####
+
+You can use ngrok to populate the service outside your local network.
+
+The free use of ngrok allows only 20 requests for minute. The default index.html 
+file is for ngrok at 5 second intervals, and the index-local.html is for local
+use only.
 
 ### "Realend" integration and deployment ###
 

@@ -2,11 +2,11 @@
 const gpio = require('rpi-gpio');
 const {GpioPumpWater} = require("../core/water/gpiopumpwater");
 
-exports.RpiFactory = (pumpPin, ledPin, buzzerPin) => {
+exports.RpiWaterFactory = (pumpPin, ledPin, buzzerPin) => {
     gpio.setup(pumpPin, gpio.DIR_LOW);
     gpio.setup(ledPin, gpio.DIR_LOW);
     gpio.setup(buzzerPin, gpio.DIR_LOW);
-    console.log("Raspberry Pi GPIO is ready")
+    console.log("Raspberry Pi Water GPIO is ready")
 
     const __pumpOn = () => {
         gpio.write(pumpPin, true);
@@ -22,13 +22,12 @@ exports.RpiFactory = (pumpPin, ledPin, buzzerPin) => {
     };
 
     let buzzerInterval;
-    let buzzerState = false;
+    let buzzerTic = 0;
     const __buzz = () => {
-        buzzerState = !buzzerState;
-        gpio.write(buzzerPin, buzzerState);
+        gpio.write(buzzerPin, buzzerTic ++ % 50 === 0);
     };
     const __buzzerOn = () => {
-        buzzerInterval = setInterval(__buzz, 1000);
+        buzzerInterval = setInterval(__buzz, 20);
     };
     const __buzzerOff = () => {
         if ("undefined" !== typeof buzzerInterval) clearInterval(buzzerInterval);
