@@ -229,7 +229,7 @@ and click the button.
 
 You will see something like it is shown in the [video](https://youtu.be/qSrHnOv2n00).
 
-## Proof of concept ##
+## Hardware simple test ##
 
 Here [test/poc](test/poc) there is a proof of concept script, and a circuit 
 picture. It consists in turning on and off a led and the pump in a 
