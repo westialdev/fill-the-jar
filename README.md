@@ -1,8 +1,8 @@
 Fill the jar
 ============
 
-This project is just a proof of concept in a dojo-like format to practice a test
-driven approach to finally release a web interface connected to a backend API,
+This project is a proof of concept in a dojo-like format to practice a test
+driven approach. The final result is an interactive web interface connected to a remote API,
 and this API handles real electronic components and a sensor.
 
 A trip from the TDD/BDD to the IoT only with Javascript.
@@ -12,7 +12,7 @@ supported controllers.
  
 It uses [express](https://expressjs.com/) for the HTTP API endpoints.
 
-And finally it handles the Raspberry Pi GPIO with the lightweight library
+It handles the Raspberry Pi GPIO with the lightweight library
 [rpi-gpio](https://github.com/JamesBarwell/rpi-gpio.js).
 
 See the final result video.
@@ -182,6 +182,17 @@ Supported models:
 * Raspberry Pi Zero W
 
 ##### Circuit #####
+
+Components:
+
+* Raspberry Pi (supported model).
+* 5V water pump.
+* 1-2K resistor for water switching sensor.
+* Buzzer for sounding the state.
+* 100R resistor and led for lighting the state.
+* Underwater pole and maximum level mark pole wires for sensor.
+* NPN Transistor as a switch to let the 5V RPi output feeding the pump.
+* Pipe, water recipients, and all required for a handmade "tap" pumping to "jar".
 
 The following circuit schema is based on the Raspberry Pi 3 B+ pin out, and it
 matches with the configuration file [src/config.js](src/config.js).
