@@ -199,7 +199,7 @@ matches with the configuration file [src/config.js](src/config.js).
 
 ![Circuit schema](doc/circuit.jpg)
 
-## Install and usage in a Raspberry Pi ##
+## Installing and usage in a Raspberry Pi ##
 
 After you made and connected everything in the circuit, follow the next steps. 
 
