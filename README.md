@@ -1,8 +1,7 @@
 Fill the jar
 ============
 
-This project is a proof of concept in a dojo-like format to practice a test
-driven approach. The final result is an interactive web interface connected to a remote API,
+This project is a proof of concept using browser, middle, backend and "real" ends with javascript. The final result is an interactive web interface connected to a remote API,
 and this API handles real electronic components and a sensor.
 
 A trip from the TDD/BDD to the IoT only with Javascript.
