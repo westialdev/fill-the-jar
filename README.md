@@ -2,7 +2,7 @@ Fill the jar
 ============
 
 This project is a proof of concept using browser, middle, backend and "real" ends with javascript. The final result is an interactive web interface connected to a remote API,
-and this API handles real electronic components and a sensor.
+and this API handles a real water pump and a level sensor.
 
 A trip from the TDD/BDD to the IoT only with Javascript.
 
